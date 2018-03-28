@@ -385,4 +385,59 @@ app.post('/getEvents', function () {
     };
 }());
 
+app.post('/form', function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        res.json({ data: req.body });
+                        // if(!subject && !text) throw new Error("Nothing to send")
+                        //
+                        // const confEmail = Config.newsletter.email
+                        // const password = Config.newsletter.password
+                        //
+                        // let allEmailString = ""
+                        // AllEmails.map(obj => allEmailString += ` ${obj.email},`)
+                        //
+                        // allEmailString.trim()
+                        //
+                        // const transporter = NodeMailer.createTransport({
+                        //     service: "Gmail",
+                        //     secure: false,
+                        //     port: 25,
+                        //     auth: {
+                        //         user: confEmail,
+                        //         pass: password
+                        //     },
+                        //     tls: {
+                        //         rejectUnauthorized: false
+                        //     }
+                        // })
+                        //
+                        // const HelperOptions = {
+                        //     from:`"Karolis - Blogger" <${confEmail}`,
+                        //     to: allEmailString,
+                        //     subject: subject,
+                        //     text: text
+                        // }
+                        // try{
+                        //     return transporter.sendMail(HelperOptions)
+                        // } catch(error) {
+                        //     return error
+                        // }
+
+                    case 1:
+                    case "end":
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, undefined);
+    }));
+
+    return function (_x11, _x12) {
+        return _ref6.apply(this, arguments);
+    };
+}());
+
 exports.default = app;
