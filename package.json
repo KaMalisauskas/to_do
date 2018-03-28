@@ -25,6 +25,7 @@
     "express": "^4.16.2",
     "mongoose": "^5.0.6",
     "mongoose-unique-validator": "^2.0.0",
+    "nodemailer": "^4.6.3",
     "nodemon": "^1.15.1",
     "transform-runtime": "0.0.0"
   }
