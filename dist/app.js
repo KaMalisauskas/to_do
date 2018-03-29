@@ -150,55 +150,112 @@ app.post('/addTask', function () {
 }());
 
 app.post('/getTask', function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
-        var userTasks, len, temp, part;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context3.prev = _context3.next) {
                     case 0:
-                        _context2.prev = 0;
-                        _context2.next = 3;
-                        return _ToDoModel2.default.findOne({ userId: req.body.userId });
+                        _context3.prev = 0;
+                        return _context3.delegateYield( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                            var part, temp, userTasks, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, task, len;
 
-                    case 3:
-                        userTasks = _context2.sent;
+                            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                                while (1) {
+                                    switch (_context2.prev = _context2.next) {
+                                        case 0:
+                                            part = void 0;
+                                            temp = void 0;
+                                            _context2.next = 4;
+                                            return _ToDoModel2.default.find({ userId: req.body.userId });
 
-                        if (!userTasks) res.status(404).json({
-                            success: false,
-                            error: "Task with this user ID doesn't exist"
-                        });
-                        console.log(userTasks.tasks);
-                        len = userTasks.tasks.length;
-                        temp = 0;
-                        part = 100 / len;
+                                        case 4:
+                                            userTasks = _context2.sent;
 
-                        userTasks.tasks.map(function (task) {
-                            return task.finished ? temp++ : "";
-                        });
+                                            if (!userTasks.length) res.status(404).json({
+                                                success: false,
+                                                error: "Task with this user ID doesn't exist"
+                                            });
+                                            _iteratorNormalCompletion2 = true;
+                                            _didIteratorError2 = false;
+                                            _iteratorError2 = undefined;
+                                            _context2.prev = 9;
+                                            for (_iterator2 = userTasks[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                                task = _step2.value;
+                                                len = task.tasks.length;
 
-                        res.status(200).json({
-                            success: true,
-                            data: userTasks,
-                            finished: temp * part
-                        });
-                        _context2.next = 16;
+                                                temp = 0;
+                                                part = 100 / len;
+                                                task.tasks.map(function (task) {
+                                                    return task.finished ? temp++ : "";
+                                                });
+                                            }
+                                            _context2.next = 17;
+                                            break;
+
+                                        case 13:
+                                            _context2.prev = 13;
+                                            _context2.t0 = _context2["catch"](9);
+                                            _didIteratorError2 = true;
+                                            _iteratorError2 = _context2.t0;
+
+                                        case 17:
+                                            _context2.prev = 17;
+                                            _context2.prev = 18;
+
+                                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                                _iterator2.return();
+                                            }
+
+                                        case 20:
+                                            _context2.prev = 20;
+
+                                            if (!_didIteratorError2) {
+                                                _context2.next = 23;
+                                                break;
+                                            }
+
+                                            throw _iteratorError2;
+
+                                        case 23:
+                                            return _context2.finish(20);
+
+                                        case 24:
+                                            return _context2.finish(17);
+
+                                        case 25:
+                                            res.status(200).json({
+                                                success: true,
+                                                data: userTasks,
+                                                finished: temp * part
+                                            });
+
+                                        case 26:
+                                        case "end":
+                                            return _context2.stop();
+                                    }
+                                }
+                            }, _callee2, undefined, [[9, 13, 17, 25], [18,, 20, 24]]);
+                        })(), "t0", 2);
+
+                    case 2:
+                        _context3.next = 7;
                         break;
 
-                    case 13:
-                        _context2.prev = 13;
-                        _context2.t0 = _context2["catch"](0);
+                    case 4:
+                        _context3.prev = 4;
+                        _context3.t1 = _context3["catch"](0);
 
                         res.status(400).json({
                             success: false,
-                            error: _context2.t0
+                            error: _context3.t1
                         });
 
-                    case 16:
+                    case 7:
                     case "end":
-                        return _context2.stop();
+                        return _context3.stop();
                 }
             }
-        }, _callee2, undefined, [[0, 13]]);
+        }, _callee3, undefined, [[0, 4]]);
     }));
 
     return function (_x3, _x4) {
@@ -207,18 +264,18 @@ app.post('/getTask', function () {
 }());
 
 app.post("/updateTask", function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
         var userTasks, i, userTask;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                     case 0:
-                        _context3.prev = 0;
-                        _context3.next = 3;
+                        _context4.prev = 0;
+                        _context4.next = 3;
                         return _ToDoModel2.default.findOne({ userId: req.body.userId });
 
                     case 3:
-                        userTasks = _context3.sent;
+                        userTasks = _context4.sent;
 
                         if (!userTasks) res.status(404).json({
                             success: false,
@@ -228,34 +285,34 @@ app.post("/updateTask", function () {
                             if (userTasks.tasks[i].task == req.body.ccc) userTasks.tasks[i].finished = true;
                         }
                         userTasks.markModified('tasks');
-                        _context3.next = 9;
+                        _context4.next = 9;
                         return userTasks.save();
 
                     case 9:
-                        userTask = _context3.sent;
+                        userTask = _context4.sent;
 
                         res.status(200).json({
                             success: true,
                             data: userTask
                         });
-                        _context3.next = 16;
+                        _context4.next = 16;
                         break;
 
                     case 13:
-                        _context3.prev = 13;
-                        _context3.t0 = _context3["catch"](0);
+                        _context4.prev = 13;
+                        _context4.t0 = _context4["catch"](0);
 
                         res.status(400).json({
                             success: false,
-                            error: _context3.t0
+                            error: _context4.t0
                         });
 
                     case 16:
                     case "end":
-                        return _context3.stop();
+                        return _context4.stop();
                 }
             }
-        }, _callee3, undefined, [[0, 13]]);
+        }, _callee4, undefined, [[0, 13]]);
     }));
 
     return function (_x5, _x6) {
@@ -264,64 +321,64 @@ app.post("/updateTask", function () {
 }());
 
 app.post('/addEvent', function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
         var events, userId, categoryId, event, test, Add;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context5.prev = _context5.next) {
                     case 0:
                         events = req.body.event;
                         userId = req.body.userId;
                         categoryId = req.body.categoryId;
                         event = { event: events, category: categoryId };
-                        _context4.prev = 4;
+                        _context5.prev = 4;
 
                         if (!(!events || !userId || !categoryId)) {
-                            _context4.next = 7;
+                            _context5.next = 7;
                             break;
                         }
 
                         throw new TypeError('Some of body is missing');
 
                     case 7:
-                        _context4.next = 9;
+                        _context5.next = 9;
                         return _EventModel2.default.findOne({ userId: userId, categoryId: categoryId });
 
                     case 9:
-                        test = _context4.sent;
+                        test = _context5.sent;
 
                         if (test) res.status(200).json({
                             success: false,
                             error: "Already submitted"
                         });
-                        _context4.next = 13;
+                        _context5.next = 13;
                         return _EventModel2.default.create({ event: event, userId: userId });
 
                     case 13:
-                        Add = _context4.sent;
+                        Add = _context5.sent;
 
                         res.status(200).json({
                             success: true,
                             data: Add
                         });
-                        _context4.next = 20;
+                        _context5.next = 20;
                         break;
 
                     case 17:
-                        _context4.prev = 17;
-                        _context4.t0 = _context4["catch"](4);
+                        _context5.prev = 17;
+                        _context5.t0 = _context5["catch"](4);
 
                         res.status(400).json({
                             success: false,
-                            error: _context4.t0
+                            error: _context5.t0
                         });
 
                     case 20:
                     case "end":
-                        return _context4.stop();
+                        return _context5.stop();
                 }
             }
-        }, _callee4, undefined, [[4, 17]]);
+        }, _callee5, undefined, [[4, 17]]);
     }));
 
     return function (_x7, _x8) {
@@ -330,30 +387,30 @@ app.post('/addEvent', function () {
 }());
 
 app.post('/getEvents', function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
         var Get;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context6.prev = _context6.next) {
                     case 0:
-                        _context5.prev = 0;
+                        _context6.prev = 0;
 
                         if (req.body.userId) {
-                            _context5.next = 3;
+                            _context6.next = 3;
                             break;
                         }
 
                         throw new TypeError("UserID missing");
 
                     case 3:
-                        _context5.next = 5;
+                        _context6.next = 5;
                         return _EventModel2.default.find({ userId: req.body.userId });
 
                     case 5:
-                        Get = _context5.sent;
+                        Get = _context6.sent;
 
                         if (Get.length) {
-                            _context5.next = 8;
+                            _context6.next = 8;
                             break;
                         }
 
@@ -364,24 +421,24 @@ app.post('/getEvents', function () {
                             success: true,
                             data: Get
                         });
-                        _context5.next = 14;
+                        _context6.next = 14;
                         break;
 
                     case 11:
-                        _context5.prev = 11;
-                        _context5.t0 = _context5["catch"](0);
+                        _context6.prev = 11;
+                        _context6.t0 = _context6["catch"](0);
 
                         res.status(400).json({
                             success: false,
-                            error: _context5.t0
+                            error: _context6.t0
                         });
 
                     case 14:
                     case "end":
-                        return _context5.stop();
+                        return _context6.stop();
                 }
             }
-        }, _callee5, undefined, [[0, 11]]);
+        }, _callee6, undefined, [[0, 11]]);
     }));
 
     return function (_x9, _x10) {
@@ -390,17 +447,17 @@ app.post('/getEvents', function () {
 }());
 
 app.post('/form', function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(req, res) {
         var BODY, confEmail, password, htmlString, key, transporter, HelperOptions;
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context7.prev = _context7.next) {
                     case 0:
-                        _context6.prev = 0;
+                        _context7.prev = 0;
                         BODY = req.body;
 
                         if (BODY) {
-                            _context6.next = 4;
+                            _context7.next = 4;
                             break;
                         }
 
@@ -435,7 +492,7 @@ app.post('/form', function () {
                             text: "Jus gavote nauja užklausa!",
                             html: "J\u016Bs gavot nauja u\u017Eklaus\u0105 \n            " + htmlString
                         };
-                        _context6.next = 12;
+                        _context7.next = 12;
                         return transporter.sendMail(HelperOptions);
 
                     case 12:
@@ -443,21 +500,21 @@ app.post('/form', function () {
                             success: true,
                             data: 'Email sent successfully'
                         });
-                        _context6.next = 18;
+                        _context7.next = 18;
                         break;
 
                     case 15:
-                        _context6.prev = 15;
-                        _context6.t0 = _context6["catch"](0);
+                        _context7.prev = 15;
+                        _context7.t0 = _context7["catch"](0);
 
-                        res.status(400).json({ error: String(_context6.t0) });
+                        res.status(400).json({ error: String(_context7.t0) });
 
                     case 18:
                     case "end":
-                        return _context6.stop();
+                        return _context7.stop();
                 }
             }
-        }, _callee6, undefined, [[0, 15]]);
+        }, _callee7, undefined, [[0, 15]]);
     }));
 
     return function (_x11, _x12) {
