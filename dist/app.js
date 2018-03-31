@@ -150,112 +150,51 @@ app.post('/addTask', function () {
 }());
 
 app.post('/getTask', function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
+        var userTasks;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context2.prev = _context2.next) {
                     case 0:
-                        _context3.prev = 0;
-                        return _context3.delegateYield( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                            var part, temp, userTasks, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, task, len;
+                        _context2.prev = 0;
+                        _context2.next = 3;
+                        return _ToDoModel2.default.find({ userId: req.body.userId });
 
-                            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                                while (1) {
-                                    switch (_context2.prev = _context2.next) {
-                                        case 0:
-                                            part = void 0;
-                                            temp = void 0;
-                                            _context2.next = 4;
-                                            return _ToDoModel2.default.find({ userId: req.body.userId });
+                    case 3:
+                        userTasks = _context2.sent;
 
-                                        case 4:
-                                            userTasks = _context2.sent;
+                        if (userTasks.length) {
+                            _context2.next = 6;
+                            break;
+                        }
 
-                                            if (!userTasks.length) res.status(404).json({
-                                                success: false,
-                                                error: "Task with this user ID doesn't exist"
-                                            });
-                                            _iteratorNormalCompletion2 = true;
-                                            _didIteratorError2 = false;
-                                            _iteratorError2 = undefined;
-                                            _context2.prev = 9;
-                                            for (_iterator2 = userTasks[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                                                task = _step2.value;
-                                                len = task.tasks.length;
+                        throw new Error('Task with this user ID doesn\'t exist');
 
-                                                temp = 0;
-                                                part = 100 / len;
-                                                task.tasks.map(function (task) {
-                                                    return task.finished ? temp++ : "";
-                                                });
-                                            }
-                                            _context2.next = 17;
-                                            break;
+                    case 6:
 
-                                        case 13:
-                                            _context2.prev = 13;
-                                            _context2.t0 = _context2["catch"](9);
-                                            _didIteratorError2 = true;
-                                            _iteratorError2 = _context2.t0;
+                        res.status(200).json({
+                            success: true,
+                            data: userTasks
+                        });
 
-                                        case 17:
-                                            _context2.prev = 17;
-                                            _context2.prev = 18;
-
-                                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                                _iterator2.return();
-                                            }
-
-                                        case 20:
-                                            _context2.prev = 20;
-
-                                            if (!_didIteratorError2) {
-                                                _context2.next = 23;
-                                                break;
-                                            }
-
-                                            throw _iteratorError2;
-
-                                        case 23:
-                                            return _context2.finish(20);
-
-                                        case 24:
-                                            return _context2.finish(17);
-
-                                        case 25:
-                                            res.status(200).json({
-                                                success: true,
-                                                data: userTasks,
-                                                finished: temp * part
-                                            });
-
-                                        case 26:
-                                        case "end":
-                                            return _context2.stop();
-                                    }
-                                }
-                            }, _callee2, undefined, [[9, 13, 17, 25], [18,, 20, 24]]);
-                        })(), "t0", 2);
-
-                    case 2:
-                        _context3.next = 7;
+                        _context2.next = 12;
                         break;
 
-                    case 4:
-                        _context3.prev = 4;
-                        _context3.t1 = _context3["catch"](0);
+                    case 9:
+                        _context2.prev = 9;
+                        _context2.t0 = _context2["catch"](0);
 
                         res.status(400).json({
                             success: false,
-                            error: _context3.t1
+                            error: _context2.t0
                         });
 
-                    case 7:
+                    case 12:
                     case "end":
-                        return _context3.stop();
+                        return _context2.stop();
                 }
             }
-        }, _callee3, undefined, [[0, 4]]);
+        }, _callee2, undefined, [[0, 9]]);
     }));
 
     return function (_x3, _x4) {
@@ -264,18 +203,18 @@ app.post('/getTask', function () {
 }());
 
 app.post("/updateTask", function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
         var userTasks, i, userTask;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context3.prev = _context3.next) {
                     case 0:
-                        _context4.prev = 0;
-                        _context4.next = 3;
+                        _context3.prev = 0;
+                        _context3.next = 3;
                         return _ToDoModel2.default.findOne({ userId: req.body.userId });
 
                     case 3:
-                        userTasks = _context4.sent;
+                        userTasks = _context3.sent;
 
                         if (!userTasks) res.status(404).json({
                             success: false,
@@ -285,15 +224,67 @@ app.post("/updateTask", function () {
                             if (userTasks.tasks[i].task == req.body.ccc) userTasks.tasks[i].finished = true;
                         }
                         userTasks.markModified('tasks');
-                        _context4.next = 9;
+                        _context3.next = 9;
                         return userTasks.save();
 
                     case 9:
-                        userTask = _context4.sent;
+                        userTask = _context3.sent;
 
                         res.status(200).json({
                             success: true,
                             data: userTask
+                        });
+                        _context3.next = 16;
+                        break;
+
+                    case 13:
+                        _context3.prev = 13;
+                        _context3.t0 = _context3["catch"](0);
+
+                        res.status(400).json({
+                            success: false,
+                            error: _context3.t0
+                        });
+
+                    case 16:
+                    case "end":
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, undefined, [[0, 13]]);
+    }));
+
+    return function (_x5, _x6) {
+        return _ref3.apply(this, arguments);
+    };
+}());
+
+app.post('/updateTaskChild', function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+        var TODO, LEN, USERTASKS;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        _context4.prev = 0;
+                        _context4.next = 3;
+                        return _ToDoModel2.default.findOne({ name: req.body.tasksName });
+
+                    case 3:
+                        TODO = _context4.sent;
+                        LEN = TODO.tasks.length;
+
+                        TODO.tasks[LEN] = { "task": req.body.newTask, finished: false };
+                        TODO.markModified('tasks');
+                        _context4.next = 9;
+                        return TODO.save();
+
+                    case 9:
+                        USERTASKS = _context4.sent;
+
+                        res.status(200).json({
+                            success: true,
+                            data: USERTASKS
                         });
                         _context4.next = 16;
                         break;
@@ -304,7 +295,7 @@ app.post("/updateTask", function () {
 
                         res.status(400).json({
                             success: false,
-                            error: _context4.t0
+                            error: String(_context4.t0)
                         });
 
                     case 16:
@@ -315,43 +306,71 @@ app.post("/updateTask", function () {
         }, _callee4, undefined, [[0, 13]]);
     }));
 
-    return function (_x5, _x6) {
-        return _ref3.apply(this, arguments);
+    return function (_x7, _x8) {
+        return _ref4.apply(this, arguments);
     };
 }());
 
-app.post('/updateTaskChild', function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
-        var TODO, LEN, USERTASKS;
+app.delete('/deleteTaskChild', function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
+        var TODO, deleted, USERTASKS;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
                 switch (_context5.prev = _context5.next) {
                     case 0:
                         _context5.prev = 0;
                         _context5.next = 3;
-                        return _ToDoModel2.default.findOne({ name: req.body.tasksName });
+                        return _ToDoModel2.default.findOne({ userId: req.body.userId, name: req.body.tasksName });
 
                     case 3:
                         TODO = _context5.sent;
-                        LEN = TODO.tasks.length;
 
-                        TODO.tasks[LEN] = { "task": req.body.newTask, finished: false };
+                        if (TODO) {
+                            _context5.next = 6;
+                            break;
+                        }
+
+                        throw new Error('There is nothing to delete by this user or tasksname');
+
+                    case 6:
+                        deleted = false;
+
+
+                        TODO.tasks.map(function (data) {
+                            if (data.task === req.body.task) {
+                                deleted = true;
+                                TODO.tasks.splice(TODO.tasks.indexOf(data), 1);
+                            }
+                        });
+
+                        if (deleted) {
+                            _context5.next = 10;
+                            break;
+                        }
+
+                        throw new Error('There is nothing to delete');
+
+                    case 10:
+
                         TODO.markModified('tasks');
-                        _context5.next = 9;
+
+                        _context5.next = 13;
                         return TODO.save();
 
-                    case 9:
+                    case 13:
                         USERTASKS = _context5.sent;
+
 
                         res.status(200).json({
                             success: true,
                             data: USERTASKS
                         });
-                        _context5.next = 16;
+
+                        _context5.next = 20;
                         break;
 
-                    case 13:
-                        _context5.prev = 13;
+                    case 17:
+                        _context5.prev = 17;
                         _context5.t0 = _context5["catch"](0);
 
                         res.status(400).json({
@@ -359,68 +378,12 @@ app.post('/updateTaskChild', function () {
                             error: String(_context5.t0)
                         });
 
-                    case 16:
+                    case 20:
                     case "end":
                         return _context5.stop();
                 }
             }
-        }, _callee5, undefined, [[0, 13]]);
-    }));
-
-    return function (_x7, _x8) {
-        return _ref4.apply(this, arguments);
-    };
-}());
-
-app.delete('/deleteTaskChild', function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
-        var TODO, USERTASKS;
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
-            while (1) {
-                switch (_context6.prev = _context6.next) {
-                    case 0:
-                        _context6.prev = 0;
-                        _context6.next = 3;
-                        return _ToDoModel2.default.findOne({ name: req.body.tasksName });
-
-                    case 3:
-                        TODO = _context6.sent;
-
-                        TODO.tasks.map(function (data) {
-                            if (data.task === req.body.task) {
-                                TODO.tasks.splice(TODO.tasks.indexOf(data), 1);
-                            }
-                        });
-                        TODO.markModified('tasks');
-                        _context6.next = 8;
-                        return TODO.save();
-
-                    case 8:
-                        USERTASKS = _context6.sent;
-
-                        res.status(200).json({
-                            success: true,
-                            data: USERTASKS
-                        });
-
-                        _context6.next = 15;
-                        break;
-
-                    case 12:
-                        _context6.prev = 12;
-                        _context6.t0 = _context6["catch"](0);
-
-                        res.status(400).json({
-                            success: false,
-                            error: String(_context6.t0)
-                        });
-
-                    case 15:
-                    case "end":
-                        return _context6.stop();
-                }
-            }
-        }, _callee6, undefined, [[0, 12]]);
+        }, _callee5, undefined, [[0, 17]]);
     }));
 
     return function (_x9, _x10) {
@@ -429,50 +392,51 @@ app.delete('/deleteTaskChild', function () {
 }());
 
 app.delete('/deleteTask', function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(req, res) {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
         var REMOVE;
-        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
-                switch (_context7.prev = _context7.next) {
+                switch (_context6.prev = _context6.next) {
                     case 0:
-                        _context7.prev = 0;
-                        _context7.next = 3;
-                        return _ToDoModel2.default.findOneAndRemove({ name: req.body.tasksName });
+                        _context6.prev = 0;
+                        _context6.next = 3;
+                        return _ToDoModel2.default.findOneAndRemove({ userId: req.body.userId, name: req.body.tasksName });
 
                     case 3:
-                        REMOVE = _context7.sent;
+                        REMOVE = _context6.sent;
 
                         if (REMOVE) {
-                            _context7.next = 6;
+                            _context6.next = 6;
                             break;
                         }
 
                         throw new Error('Nothing to remove');
 
                     case 6:
+
                         res.status(200).json({
                             success: true,
                             data: 'Removal was successful'
                         });
 
-                        _context7.next = 12;
+                        _context6.next = 12;
                         break;
 
                     case 9:
-                        _context7.prev = 9;
-                        _context7.t0 = _context7["catch"](0);
+                        _context6.prev = 9;
+                        _context6.t0 = _context6["catch"](0);
 
                         res.status(400).json({
                             success: false,
-                            error: String(_context7.t0)
+                            error: String(_context6.t0)
                         });
 
                     case 12:
                     case "end":
-                        return _context7.stop();
+                        return _context6.stop();
                 }
             }
-        }, _callee7, undefined, [[0, 9]]);
+        }, _callee6, undefined, [[0, 9]]);
     }));
 
     return function (_x11, _x12) {
@@ -481,64 +445,64 @@ app.delete('/deleteTask', function () {
 }());
 
 app.post('/addEvent', function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(req, res) {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(req, res) {
         var events, userId, categoryId, event, test, Add;
-        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
-                switch (_context8.prev = _context8.next) {
+                switch (_context7.prev = _context7.next) {
                     case 0:
                         events = req.body.event;
                         userId = req.body.userId;
                         categoryId = req.body.categoryId;
                         event = { event: events, category: categoryId };
-                        _context8.prev = 4;
+                        _context7.prev = 4;
 
                         if (!(!events || !userId || !categoryId)) {
-                            _context8.next = 7;
+                            _context7.next = 7;
                             break;
                         }
 
                         throw new TypeError('Some of body is missing');
 
                     case 7:
-                        _context8.next = 9;
+                        _context7.next = 9;
                         return _EventModel2.default.findOne({ userId: userId, categoryId: categoryId });
 
                     case 9:
-                        test = _context8.sent;
+                        test = _context7.sent;
 
                         if (test) res.status(200).json({
                             success: false,
                             error: "Already submitted"
                         });
-                        _context8.next = 13;
+                        _context7.next = 13;
                         return _EventModel2.default.create({ event: event, userId: userId });
 
                     case 13:
-                        Add = _context8.sent;
+                        Add = _context7.sent;
 
                         res.status(200).json({
                             success: true,
                             data: Add
                         });
-                        _context8.next = 20;
+                        _context7.next = 20;
                         break;
 
                     case 17:
-                        _context8.prev = 17;
-                        _context8.t0 = _context8["catch"](4);
+                        _context7.prev = 17;
+                        _context7.t0 = _context7["catch"](4);
 
                         res.status(400).json({
                             success: false,
-                            error: _context8.t0
+                            error: _context7.t0
                         });
 
                     case 20:
                     case "end":
-                        return _context8.stop();
+                        return _context7.stop();
                 }
             }
-        }, _callee8, undefined, [[4, 17]]);
+        }, _callee7, undefined, [[4, 17]]);
     }));
 
     return function (_x13, _x14) {
@@ -547,58 +511,60 @@ app.post('/addEvent', function () {
 }());
 
 app.post('/getEvents', function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(req, res) {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(req, res) {
         var Get;
-        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
             while (1) {
-                switch (_context9.prev = _context9.next) {
+                switch (_context8.prev = _context8.next) {
                     case 0:
-                        _context9.prev = 0;
+                        _context8.prev = 0;
 
                         if (req.body.userId) {
-                            _context9.next = 3;
+                            _context8.next = 3;
                             break;
                         }
 
                         throw new TypeError("UserID missing");
 
                     case 3:
-                        _context9.next = 5;
+                        _context8.next = 5;
                         return _EventModel2.default.find({ userId: req.body.userId });
 
                     case 5:
-                        Get = _context9.sent;
+                        Get = _context8.sent;
 
                         if (Get.length) {
-                            _context9.next = 8;
+                            _context8.next = 8;
                             break;
                         }
 
                         throw new Error("No events found");
 
                     case 8:
+
                         res.status(200).json({
                             success: true,
                             data: Get
                         });
-                        _context9.next = 14;
+
+                        _context8.next = 14;
                         break;
 
                     case 11:
-                        _context9.prev = 11;
-                        _context9.t0 = _context9["catch"](0);
+                        _context8.prev = 11;
+                        _context8.t0 = _context8["catch"](0);
 
                         res.status(400).json({
                             success: false,
-                            error: _context9.t0
+                            error: _context8.t0
                         });
 
                     case 14:
                     case "end":
-                        return _context9.stop();
+                        return _context8.stop();
                 }
             }
-        }, _callee9, undefined, [[0, 11]]);
+        }, _callee8, undefined, [[0, 11]]);
     }));
 
     return function (_x15, _x16) {
@@ -607,17 +573,17 @@ app.post('/getEvents', function () {
 }());
 
 app.post('/form', function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(req, res) {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(req, res) {
         var BODY, confEmail, password, htmlString, key, transporter, HelperOptions;
-        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
             while (1) {
-                switch (_context10.prev = _context10.next) {
+                switch (_context9.prev = _context9.next) {
                     case 0:
-                        _context10.prev = 0;
+                        _context9.prev = 0;
                         BODY = req.body;
 
                         if (BODY) {
-                            _context10.next = 4;
+                            _context9.next = 4;
                             break;
                         }
 
@@ -652,7 +618,7 @@ app.post('/form', function () {
                             text: "Jus gavote nauja užklausa!",
                             html: "J\u016Bs gavot nauja u\u017Eklaus\u0105 \n            " + htmlString
                         };
-                        _context10.next = 12;
+                        _context9.next = 12;
                         return transporter.sendMail(HelperOptions);
 
                     case 12:
@@ -660,21 +626,21 @@ app.post('/form', function () {
                             success: true,
                             data: 'Email sent successfully'
                         });
-                        _context10.next = 18;
+                        _context9.next = 18;
                         break;
 
                     case 15:
-                        _context10.prev = 15;
-                        _context10.t0 = _context10["catch"](0);
+                        _context9.prev = 15;
+                        _context9.t0 = _context9["catch"](0);
 
-                        res.status(400).json({ error: String(_context10.t0) });
+                        res.status(400).json({ error: String(_context9.t0) });
 
                     case 18:
                     case "end":
-                        return _context10.stop();
+                        return _context9.stop();
                 }
             }
-        }, _callee10, undefined, [[0, 15]]);
+        }, _callee9, undefined, [[0, 15]]);
     }));
 
     return function (_x17, _x18) {
