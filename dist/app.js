@@ -211,7 +211,7 @@ app.post("/updateTask", function () {
                     case 0:
                         _context3.prev = 0;
                         _context3.next = 3;
-                        return _ToDoModel2.default.findOne({ userId: req.body.userId });
+                        return _ToDoModel2.default.findOne({ userId: req.body.userId, name: req.body.taskName });
 
                     case 3:
                         userTasks = _context3.sent;
