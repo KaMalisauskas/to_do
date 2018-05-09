@@ -613,7 +613,7 @@ app.post('/form', function () {
                         });
                         HelperOptions = {
                             from: "\"Karolis - Blogger\" <",
-                            to: 'butukainovilniuje@gmail.com',
+                            to: 'butukainosvilniuje@gmail.com',
                             subject: 'Nauja uzklausa is butukainosvilniuje',
                             text: "Jus gavote nauja užklausa!",
                             html: "J\u016Bs gavot nauja u\u017Eklaus\u0105 \n            " + htmlString
